@@ -2,6 +2,7 @@
 using ChallengeDBCCompany.Services.Contracts;
 using ChallengeDBCCompany.Templates;
 using System;
+using System.Collections;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -50,6 +51,95 @@ namespace ChallengeDBCCompany.Services
 
             await _reportService.WriteAsync(report, filePath);
             Console.WriteLine($"{filePath} file processed.");
+        }
+
+        //Mais performático, porém, mais complexo
+        public void ReadFileWithSpan(string filePath)
+        {
+            string line;
+            var report = new ReportDataDto();
+            ArrayList parts = new ArrayList();
+
+            using (var fs = File.OpenRead(filePath))
+            using (var reader = new StreamReader(fs))
+            while ((line = reader.ReadLine()) != null)
+            {
+                var span = line.AsSpan();
+
+                // FormatId 
+                var firstCommaPos = span.IndexOf('ç');
+                string formatId = span.Slice(0, firstCommaPos).ToString();
+                parts.Add(formatId);
+
+                _ComposeParts(parts, ref span, ref firstCommaPos);
+
+                string[] partsArr = new string[parts.Count];
+                parts.CopyTo(partsArr);
+                parts.Clear();
+
+                FactoryTemplate.GetInstance(formatId)
+                    .BindTemplateInReportData(report, partsArr);
+            }
+
+            _reportService.Write(report, filePath);
+            Console.WriteLine($"{filePath} file processed.");
+        }
+
+        private void _ComposeParts(ArrayList parts, ref ReadOnlySpan<char> span, ref int firstCommaPos)
+        {
+            // Salesman | Customer
+            if (parts.Contains("001") || parts.Contains("002"))
+            {
+                // Document
+                span = span.Slice(firstCommaPos + 1);
+                firstCommaPos = span.IndexOf('ç');
+                string document = span.Slice(0, firstCommaPos).ToString();
+                parts.Add(document);
+
+                // Name
+                span = span.Slice(firstCommaPos + 1);
+                firstCommaPos = span.IndexOf('ç');
+                string name = span.Slice(0, firstCommaPos).ToString();
+                parts.Add(name);
+
+                // Salesman
+                if (parts.Contains("001"))
+                {
+                    // Salary
+                    span = span.Slice(firstCommaPos + 1);
+                    string salary = span.ToString();
+                    parts.Add(salary);
+                }
+
+                // Customer
+                if (parts.Contains("002"))
+                {
+                    // BusinessArea
+                    span = span.Slice(firstCommaPos + 1);
+                    string businessArea = span.ToString();
+                    parts.Add(businessArea);
+                }
+            }
+            // Sale
+            else if (parts.Contains("003"))
+            {
+                // SaleId
+                span = span.Slice(firstCommaPos + 1);
+                firstCommaPos = span.IndexOf('ç');
+                string document = span.Slice(0, firstCommaPos).ToString();
+                parts.Add(document);
+
+                // Items
+                span = span.Slice(firstCommaPos + 1);
+                firstCommaPos = span.IndexOf('ç');
+                string items = span.Slice(0, firstCommaPos).ToString();
+                parts.Add(items);
+
+                // SalesmanName
+                span = span.Slice(firstCommaPos + 1);
+                string salesmanName = span.ToString();
+                parts.Add(salesmanName);
+            }
         }
     }
 }

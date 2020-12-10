@@ -19,5 +19,7 @@ namespace ChallengeDBCCompany.Services.Contracts
         /// </summary>
         /// <param name="filePath">Caminho e nome do arquivo no disco.</param>
         Task ReadFileAsync(string filePath);
+
+        void ReadFileWithSpan(string filePath);
     }
 }

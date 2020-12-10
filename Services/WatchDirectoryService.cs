@@ -41,11 +41,12 @@ namespace ChallengeDBCCompany.Services
 
             try
             {
-                Task.Run(() =>
-                    _dataImportService.ReadFileAsync(file)).Wait();
+                //Task.Run(() =>
+                //    _dataImportService.ReadFileAsync(file)).Wait();
                 //_dataImportService.ReadFile(file);
+                _dataImportService.ReadFileWithSpan(file);
             }
-            catch 
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error processing {file}.");
             }             
