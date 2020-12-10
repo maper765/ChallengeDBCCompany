@@ -2,9 +2,19 @@
 
 namespace ChallengeDBCCompany.Templates
 {
+	/// <summary>
+	///		Cria instância para os objetos e atributos que compõem
+	///		o relatório.
+	/// </summary>
     public class FactoryTemplate
     {
-		public static ITemplate Make(string formatId)
+		/// <summary>
+		///		Obtêm uma instância para a implementação de 
+		///		<see cref="ITemplate"/>.
+		/// </summary>
+		/// <param name="formatId">Código que identifica o template.</param>
+		/// <returns></returns>
+		public static ITemplate GetInstance(string formatId)
 		{
 			var namespaceTemplate =
 				$"ChallengeDBCCompany.Templates.Template{formatId}";

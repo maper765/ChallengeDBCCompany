@@ -25,7 +25,8 @@ namespace ChallengeDBCCompany.Services
             while ((line = reader.ReadLine()) != null)
             {
                 var parts = line.Split('ç');
-                FactoryTemplate.Make(parts[0]).BindTemplateInReportData(report, parts);
+                FactoryTemplate.GetInstance(parts[0])
+                    .BindTemplateInReportData(report, parts);
             }
 
             _reportService.Write(report, filePath);
