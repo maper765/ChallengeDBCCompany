@@ -12,7 +12,7 @@ namespace ChallengeDBCCompany.BuildingBlocks
             _pathOut = pathOut;
         }
 
-        public void CreateFile(string filePath, StringBuilder sb)
+        public void CreateFile(string filePath, StringBuilder report)
         {
             var filename = $"{Path.GetFileNameWithoutExtension(filePath)}.done.{Path.GetExtension(filePath)}";
             var filePathOut = Path.Combine(_pathOut, filename);
@@ -21,8 +21,8 @@ namespace ChallengeDBCCompany.BuildingBlocks
                 File.Create(filePathOut).Close();
 
             TextWriter archive = File.AppendText(filePathOut);
-            archive.WriteLine(sb);
-            sb.Clear();
+            archive.WriteLine(report);
+            report.Clear();
             archive.Close();
         }
     }

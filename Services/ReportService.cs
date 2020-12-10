@@ -17,14 +17,14 @@ namespace ChallengeDBCCompany.Services
 
         public void WriteReportInDisk(ReportDataDto report, string filePath)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder writeReport = new StringBuilder();
 
-            sb.AppendLine($"Number of customers in the input file: {report.Customers.Count}.");
-            sb.AppendLine($"Number of salesman in the input file: {report.Salesmans.Count}.");
-            sb.AppendLine($"ID Most expensive sale: {report.Sales.GroupBy(g => new { g.SaleId, Price = g.Items.Max(s => s.Price) }).OrderByDescending(o => o.Key.Price).FirstOrDefault().Key.SaleId}");
-            sb.AppendLine($"The worst salesman: {report.Sales.GroupBy(g => new { g.SalesmanName, Price = g.Items.Min(s => s.Price) }).OrderBy(o => o.Key.Price).FirstOrDefault().Key.SalesmanName}.");
+            writeReport.AppendLine($"Number of customers in the input file: {report.Customers.Count}.");
+            writeReport.AppendLine($"Number of salesman in the input file: {report.Salesmans.Count}.");
+            writeReport.AppendLine($"ID Most expensive sale: {report.Sales.GroupBy(g => new { g.SaleId, Price = g.Items.Max(s => s.Price) }).OrderByDescending(o => o.Key.Price).FirstOrDefault().Key.SaleId}");
+            writeReport.AppendLine($"The worst salesman: {report.Sales.GroupBy(g => new { g.SalesmanName, Price = g.Items.Min(s => s.Price) }).OrderBy(o => o.Key.Price).FirstOrDefault().Key.SalesmanName}.");
 
-            _fileSupport.CreateFile(filePath, sb);
+            _fileSupport.CreateFile(filePath, writeReport);
         }
     }
 }
