@@ -14,7 +14,7 @@ namespace ChallengeDBCCompany.Services
 
         public DataImportService(string pathOut)
         {
-            _reportService = new ReportService(pathOut);
+            _reportService = new ReportInDiskService(pathOut);
             _dataParseSupport = new DataParseSupport();
         }
 
@@ -28,45 +28,62 @@ namespace ChallengeDBCCompany.Services
             while ((line = reader.ReadLine()) != null)
             {
                 var parts = line.Split('ç');
-                    _ExtractDataBasedonLayout(report, parts);
+                    _ExtractDataBasedOnTemplate(report, parts);
             }
 
-            _reportService.WriteReportInDisk(report, filePath);
+            _reportService.Write(report, filePath);
             Console.WriteLine($"{filePath} file processed.");
         }
 
-        private void _ExtractDataBasedonLayout(ReportDataDto report, string[] parts)
+        private void _ExtractDataBasedOnTemplate(ReportDataDto report, string[] parts)
         {
-            if (parts[0] == "001")
+            switch (parts[0])
             {
-                report.Salesmans.Add(new SalesmanDto
-                {
-                    FormatId = parts[0],
-                    Document = parts[1],
-                    Name = parts[2],
-                    Salary = double.Parse(parts[3], CultureInfo.InvariantCulture)
-                });
+                case "001":
+                    _GetSalesmanTemplate(report, parts);
+                    break;
+                case "002":
+                    _GetCustomerTemplate(report, parts);
+                    break;
+                case "003":
+                    _GetSaleTemplate(report, parts);
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
-            else if (parts[0] == "002")
+        }
+
+        private void _GetSalesmanTemplate(ReportDataDto report, string[] parts)
+        {
+            report.Salesmans.Add(new SalesmanDto
             {
-                report.Customers.Add(new CustomerDto
-                {
-                    FormatId = parts[0],
-                    Document = parts[1],
-                    Name = parts[2],
-                    BusinessArea = parts[3]
-                });
-            }
-            else if (parts[0] == "003")
+                FormatId = parts[0],
+                Document = parts[1],
+                Name = parts[2],
+                Salary = double.Parse(parts[3], CultureInfo.InvariantCulture)
+            });
+        }
+
+        private void _GetCustomerTemplate(ReportDataDto report, string[] parts)
+        {
+            report.Customers.Add(new CustomerDto
             {
-                report.Sales.Add(new SaleDto
-                {
-                    FormatId = parts[0],
-                    SaleId = int.Parse(parts[1]),
-                    Items = _dataParseSupport.ToItemList(parts[2]),
-                    SalesmanName = parts[3]
-                });
-            }
+                FormatId = parts[0],
+                Document = parts[1],
+                Name = parts[2],
+                BusinessArea = parts[3]
+            });
+        }
+
+        private void _GetSaleTemplate(ReportDataDto report, string[] parts)
+        {
+            report.Sales.Add(new SaleDto
+            {
+                FormatId = parts[0],
+                SaleId = int.Parse(parts[1]),
+                Items = _dataParseSupport.ToItemList(parts[2]),
+                SalesmanName = parts[3]
+            });
         }
     }
 }

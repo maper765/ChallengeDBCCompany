@@ -6,16 +6,19 @@ using System.Text;
 
 namespace ChallengeDBCCompany.Services
 {
-    public class ReportService : IReportService
+    /// <summary>
+    ///     Escreve dados do relatório no disco local.
+    /// </summary>
+    public class ReportInDiskService : IReportService
     {
         private readonly FileSupport _fileSupport;
 
-        public ReportService(string pathOut)
+        public ReportInDiskService(string pathOut)
         {
             _fileSupport = new FileSupport(pathOut);
         }
 
-        public void WriteReportInDisk(ReportDataDto report, string filePath)
+        public void Write(ReportDataDto report, string filePath)
         {
             StringBuilder writeReport = new StringBuilder();
 

@@ -8,10 +8,10 @@ namespace ChallengeDBCCompany.Services.Contracts
     public interface IReportService
     {
         /// <summary>
-        ///     Escreve dados do relório em um arquivo no disco.
+        ///     Escreve dados no relório.
         /// </summary>
         /// <param name="report">Instância de <see cref="ReportDataDto"/>.</param>
         /// <param name="filePath">Caminho e nome do arquivo de origem no disco.</param>
-        void WriteReportInDisk(ReportDataDto report, string filePath);
+        void Write(ReportDataDto report, string filePath);
     }
 }
