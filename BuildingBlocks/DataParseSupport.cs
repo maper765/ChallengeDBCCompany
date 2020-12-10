@@ -7,7 +7,7 @@ namespace ChallengeDBCCompany.BuildingBlocks
 {
     public sealed class DataParseSupport
     {
-        public IEnumerable<ItemDto> ToItemList(string value)
+        public static IEnumerable<ItemDto> ToItemList(string value)
         {
             var items = new List<ItemDto>();
 
