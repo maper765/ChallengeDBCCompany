@@ -35,7 +35,6 @@ namespace ChallengeDBCCompany.BuildingBlocks
             if (!File.Exists(filePathOut))
                 File.Create(filePathOut).Close();
 
-
             using (FileStream stream = new FileStream(filePathOut, FileMode.Create, FileAccess.ReadWrite))
             {
                 using (StreamWriter streamWriter = new StreamWriter(stream))
