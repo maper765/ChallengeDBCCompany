@@ -1,9 +1,7 @@
-﻿using ChallengeDBCCompany.BuildingBlocks;
-using ChallengeDBCCompany.Dtos;
+﻿using ChallengeDBCCompany.Dtos;
 using ChallengeDBCCompany.Services.Contracts;
 using ChallengeDBCCompany.Templates;
 using System;
-using System.Globalization;
 using System.IO;
 
 namespace ChallengeDBCCompany.Services
