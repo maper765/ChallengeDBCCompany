@@ -1,6 +1,7 @@
 ﻿using ChallengeDBCCompany.Services.Contracts;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace ChallengeDBCCompany.Services
 {
@@ -25,7 +26,7 @@ namespace ChallengeDBCCompany.Services
 
         public void WatchNewFiles()
         {
-            _watchFile.Created += _OnFileChanged;
+            _watchFile.Created += new FileSystemEventHandler(_OnFileChanged);
             _watchFile.EnableRaisingEvents = true;
 
             Console.WriteLine($"Monitoring {_fileType} file in {_pathIn}");
@@ -40,7 +41,9 @@ namespace ChallengeDBCCompany.Services
 
             try
             {
-                _dataImportService.ReadFile(file);
+                Task.Run(() =>
+                    _dataImportService.ReadFileAsync(file)).Wait();
+                //_dataImportService.ReadFile(file);
             }
             catch 
             {
