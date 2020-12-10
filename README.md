@@ -1,7 +1,7 @@
 # ChallengeDBCCompany
 ### Teste para Desenvolvedor
 
-Criar um sistema de análise de dados, onde deverá ser importados lotes de arquivos, ler e analisar os dados e produzir um relatório.
+Criar um sistema de análise de dados, onde deverá ser importado lotes de arquivos, ler e analisar os dados e produzir um relatório.
 
 >Aplicação console desenvolvida em .NET Core 3.1 com C#. 
 
