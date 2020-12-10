@@ -53,8 +53,7 @@ namespace ChallengeDBCCompany.Services
             }
         }
 
-        private void _GetSalesmanTemplate(ReportDataDto report, string[] parts)
-        {
+        private void _GetSalesmanTemplate(ReportDataDto report, string[] parts) =>
             report.Salesmans.Add(new SalesmanDto
             {
                 FormatId = parts[0],
@@ -62,10 +61,8 @@ namespace ChallengeDBCCompany.Services
                 Name = parts[2],
                 Salary = double.Parse(parts[3], CultureInfo.InvariantCulture)
             });
-        }
 
-        private void _GetCustomerTemplate(ReportDataDto report, string[] parts)
-        {
+        private void _GetCustomerTemplate(ReportDataDto report, string[] parts) =>
             report.Customers.Add(new CustomerDto
             {
                 FormatId = parts[0],
@@ -73,10 +70,8 @@ namespace ChallengeDBCCompany.Services
                 Name = parts[2],
                 BusinessArea = parts[3]
             });
-        }
 
-        private void _GetSaleTemplate(ReportDataDto report, string[] parts)
-        {
+        private void _GetSaleTemplate(ReportDataDto report, string[] parts) =>
             report.Sales.Add(new SaleDto
             {
                 FormatId = parts[0],
@@ -84,6 +79,5 @@ namespace ChallengeDBCCompany.Services
                 Items = _dataParseSupport.ToItemList(parts[2]),
                 SalesmanName = parts[3]
             });
-        }
     }
 }
