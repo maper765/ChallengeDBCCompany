@@ -9,7 +9,7 @@ namespace ChallengeDBCCompany.Services.Contracts
     public interface IReportService
     {
         /// <summary>
-        ///     Escreve dados no relório.
+        ///     Escreve dados no relatório.
         /// </summary>
         /// <param name="report">Instância de <see cref="ReportDataDto"/>.</param>
         /// <param name="filePath">Caminho e nome do arquivo de origem no disco.</param>

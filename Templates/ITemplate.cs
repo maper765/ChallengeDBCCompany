@@ -8,7 +8,7 @@ namespace ChallengeDBCCompany.Templates
     public interface ITemplate
     {
         /// <summary>
-        ///     Raliza a ligação dos dados recebido na leitura do arquivo
+        ///     Realiza a ligação dos dados recebido na leitura do arquivo
         ///     no objeto <see cref="ReportDataDto"/>.
         /// </summary>
         /// <param name="report">Instância de <see cref="ReportDataDto"/>.</param>

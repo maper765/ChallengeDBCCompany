@@ -31,7 +31,7 @@ namespace ChallengeDBCCompany.Services
 
             sb.AppendLine($"Number of customers in the input file: {report.Customers.Count}.");
             sb.AppendLine($"Number of salesman in the input file: {report.Salesmans.Count}.");
-            sb.AppendLine($"ID Most expensive sale: {report.Sales.GroupBy(g => new { g.SaleId, Price = g.Items.Max(s => s.Price) }).OrderByDescending(o => o.Key.Price).FirstOrDefault().Key.SaleId}");
+            sb.AppendLine($"ID Most expensive sale: {report.Sales.GroupBy(g => new { g.SaleId, Price = g.Items.Max(s => s.Price) }).OrderByDescending(o => o.Key.Price).FirstOrDefault().Key.SaleId}.");
             sb.AppendLine($"The worst salesman: {report.Sales.GroupBy(g => new { g.SalesmanName, Price = g.Items.Min(s => s.Price) }).OrderBy(o => o.Key.Price).FirstOrDefault().Key.SalesmanName}.");
             
             return sb;
