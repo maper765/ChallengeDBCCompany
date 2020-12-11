@@ -48,7 +48,7 @@ namespace ChallengeDBCCompany.Services
                 //_dataImportService.ReadFile(file);
                 _dataImportService.ReadFileWithSpan(file);
             }
-            catch (Exception ex)
+            catch
             {
                 Console.WriteLine($"Error processing {file}.");
             }             
