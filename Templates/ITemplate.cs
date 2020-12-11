@@ -3,7 +3,7 @@
 namespace ChallengeDBCCompany.Templates
 {
     /// <summary>
-    ///     Abstração da ligação de dados no relatório.
+    ///     Abstração da ligação de dados no relatório através dos templates.
     /// </summary>
     public interface ITemplate
     {
