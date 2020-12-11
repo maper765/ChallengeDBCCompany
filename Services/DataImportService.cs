@@ -67,11 +67,11 @@ namespace ChallengeDBCCompany.Services
                 var span = line.AsSpan();
 
                 // FormatId 
-                var firstCommaPos = span.IndexOf('ç');
-                string formatId = span.Slice(0, firstCommaPos).ToString();
+                var firstSeparatorPos = span.IndexOf('ç');
+                string formatId = span.Slice(0, firstSeparatorPos).ToString();
                 parts.Add(formatId);
 
-                _ComposeParts(parts, ref span, ref firstCommaPos);
+                _ComposeParts(parts, ref span, ref firstSeparatorPos);
 
                 string[] partsArr = new string[parts.Count];
                 parts.CopyTo(partsArr);
@@ -85,28 +85,28 @@ namespace ChallengeDBCCompany.Services
             Console.WriteLine($"{filePath} file processed.");
         }
 
-        private void _ComposeParts(ArrayList parts, ref ReadOnlySpan<char> span, ref int firstCommaPos)
+        private void _ComposeParts(ArrayList parts, ref ReadOnlySpan<char> span, ref int firstSeparatorPos)
         {
             // Salesman | Customer
             if (parts.Contains("001") || parts.Contains("002"))
             {
                 // Document
-                span = span.Slice(firstCommaPos + 1);
-                firstCommaPos = span.IndexOf('ç');
-                string document = span.Slice(0, firstCommaPos).ToString();
+                span = span.Slice(firstSeparatorPos + 1);
+                firstSeparatorPos = span.IndexOf('ç');
+                string document = span.Slice(0, firstSeparatorPos).ToString();
                 parts.Add(document);
 
                 // Name
-                span = span.Slice(firstCommaPos + 1);
-                firstCommaPos = span.IndexOf('ç');
-                string name = span.Slice(0, firstCommaPos).ToString();
+                span = span.Slice(firstSeparatorPos + 1);
+                firstSeparatorPos = span.IndexOf('ç');
+                string name = span.Slice(0, firstSeparatorPos).ToString();
                 parts.Add(name);
 
                 // Salesman
                 if (parts.Contains("001"))
                 {
                     // Salary
-                    span = span.Slice(firstCommaPos + 1);
+                    span = span.Slice(firstSeparatorPos + 1);
                     string salary = span.ToString();
                     parts.Add(salary);
                 }
@@ -115,7 +115,7 @@ namespace ChallengeDBCCompany.Services
                 if (parts.Contains("002"))
                 {
                     // BusinessArea
-                    span = span.Slice(firstCommaPos + 1);
+                    span = span.Slice(firstSeparatorPos + 1);
                     string businessArea = span.ToString();
                     parts.Add(businessArea);
                 }
@@ -124,19 +124,19 @@ namespace ChallengeDBCCompany.Services
             else if (parts.Contains("003"))
             {
                 // SaleId
-                span = span.Slice(firstCommaPos + 1);
-                firstCommaPos = span.IndexOf('ç');
-                string document = span.Slice(0, firstCommaPos).ToString();
+                span = span.Slice(firstSeparatorPos + 1);
+                firstSeparatorPos = span.IndexOf('ç');
+                string document = span.Slice(0, firstSeparatorPos).ToString();
                 parts.Add(document);
 
                 // Items
-                span = span.Slice(firstCommaPos + 1);
-                firstCommaPos = span.IndexOf('ç');
-                string items = span.Slice(0, firstCommaPos).ToString();
+                span = span.Slice(firstSeparatorPos + 1);
+                firstSeparatorPos = span.IndexOf('ç');
+                string items = span.Slice(0, firstSeparatorPos).ToString();
                 parts.Add(items);
 
                 // SalesmanName
-                span = span.Slice(firstCommaPos + 1);
+                span = span.Slice(firstSeparatorPos + 1);
                 string salesmanName = span.ToString();
                 parts.Add(salesmanName);
             }

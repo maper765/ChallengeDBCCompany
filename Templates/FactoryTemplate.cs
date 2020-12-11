@@ -3,8 +3,7 @@
 namespace ChallengeDBCCompany.Templates
 {
 	/// <summary>
-	///		Cria instância para os objetos e atributos que compõem
-	///		o relatório.
+	///		Cria instância para o template de atributos do relatório.
 	/// </summary>
     public class FactoryTemplate
     {
@@ -13,14 +12,10 @@ namespace ChallengeDBCCompany.Templates
 		///		<see cref="ITemplate"/>.
 		/// </summary>
 		/// <param name="formatId">Código que identifica o template.</param>
-		/// <returns></returns>
-		public static ITemplate GetInstance(string formatId)
-		{
-			var namespaceTemplate =
-				$"ChallengeDBCCompany.Templates.Template{formatId}";
-			Type classe = Type.GetType(namespaceTemplate);
-
-			return Activator.CreateInstance(classe) as ITemplate;
-		}
+		/// <returns>Instância de <see cref="ITemplate"/>.</returns>
+		public static ITemplate GetInstance(string formatId) =>
+			Activator.CreateInstance(
+				Type.GetType(
+					$"ChallengeDBCCompany.Templates.Template{formatId}")) as ITemplate;
 	}
 }

@@ -18,13 +18,10 @@ namespace ChallengeDBCCompany.BuildingBlocks
             var filename = $"{Path.GetFileNameWithoutExtension(filePath)}.done.{Path.GetExtension(filePath)}";
             var filePathOut = Path.Combine(_pathOut, filename);
 
-            if (!File.Exists(filePathOut))
-                File.Create(filePathOut).Close();
-
-            TextWriter archive = File.AppendText(filePathOut);
-            archive.WriteLine(report);
+            using FileStream stream = new FileStream(filePathOut, FileMode.Create, FileAccess.ReadWrite);
+            using StreamWriter streamWriter = new StreamWriter(stream);
+            streamWriter.WriteLine(report);
             report.Clear();
-            archive.Close();
         }
 
         public async Task CreateFileAsync(string filePath, StringBuilder report)
@@ -32,17 +29,10 @@ namespace ChallengeDBCCompany.BuildingBlocks
             var filename = $"{Path.GetFileNameWithoutExtension(filePath)}.done.{Path.GetExtension(filePath)}";
             var filePathOut = Path.Combine(_pathOut, filename);
 
-            if (!File.Exists(filePathOut))
-                File.Create(filePathOut).Close();
-
-            using (FileStream stream = new FileStream(filePathOut, FileMode.Create, FileAccess.ReadWrite))
-            {
-                using (StreamWriter streamWriter = new StreamWriter(stream))
-                {
-                    await streamWriter.WriteLineAsync(report);
-                    report.Clear();
-                }
-            }
+            using FileStream stream = new FileStream(filePathOut, FileMode.Create, FileAccess.ReadWrite);
+            using StreamWriter streamWriter = new StreamWriter(stream);
+            await streamWriter.WriteLineAsync(report);
+            report.Clear();
         }
     }
 }

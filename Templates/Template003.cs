@@ -3,6 +3,9 @@ using ChallengeDBCCompany.Dtos;
 
 namespace ChallengeDBCCompany.Templates
 {
+    /// <summary>
+    ///     Template para venda.
+    /// </summary>
     public class Template003 : ITemplate
     {
         public void BindTemplateInReportData(ReportDataDto report, string[] parts) =>

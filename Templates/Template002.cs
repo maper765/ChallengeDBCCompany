@@ -2,6 +2,9 @@
 
 namespace ChallengeDBCCompany.Templates
 {
+    /// <summary>
+    ///     Template para Cliente.
+    /// </summary>
     public class Template002 : ITemplate
     {
         public void BindTemplateInReportData(ReportDataDto report, string[] parts) =>

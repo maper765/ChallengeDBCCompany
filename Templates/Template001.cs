@@ -3,6 +3,9 @@ using System.Globalization;
 
 namespace ChallengeDBCCompany.Templates
 {
+    /// <summary>
+    ///     Template para vendedor.
+    /// </summary>
     public class Template001 : ITemplate
     {
         public void BindTemplateInReportData(ReportDataDto report, string[] parts) =>

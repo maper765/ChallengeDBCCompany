@@ -10,11 +10,11 @@ namespace ChallengeDBCCompany.BuildingBlocks
         public static IEnumerable<ItemDto> ToItemList(string value)
         {
             var items = new List<ItemDto>();
+            var rows = value.TrimStart('[').TrimEnd(']').Split(',');
 
-            var rows = value.Split(',');
             Parallel.ForEach(rows, row =>
             {
-                var itemsSplit = row.TrimStart('[').TrimEnd(']').Split('-');
+                var itemsSplit = row.Split('-');
                 items.Add(new ItemDto
                 {
                     Id = int.Parse(itemsSplit[0]),

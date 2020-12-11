@@ -27,7 +27,7 @@ namespace ChallengeDBCCompany.Services
 
         private static StringBuilder _WriteInReport(ReportDataDto report)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.AppendLine($"Number of customers in the input file: {report.Customers.Count}.");
             sb.AppendLine($"Number of salesman in the input file: {report.Salesmans.Count}.");
