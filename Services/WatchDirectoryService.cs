@@ -37,7 +37,7 @@ namespace ChallengeDBCCompany.Services
             if (e.ChangeType != WatcherChangeTypes.Created)
                 return;
 
-            Console.Clear();
+            //Console.Clear();
 
             var file = Path.Combine(_pathIn, Path.GetFileName(e.Name));
 
